@@ -41,7 +41,7 @@ public class RandomPasswordGenerator extends JFrame {
         copyButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                copyToClipboard();
             }
         });
 
@@ -57,6 +57,13 @@ public class RandomPasswordGenerator extends JFrame {
         passwordField.setText(password);
     }
 
+    private void copyToClipboard() {
+        String password = passwordField.getText();
+        StringSelection stringSelection = new StringSelection(password);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+        JOptionPane.showMessageDialog(this, "Password copied to clipboard!");
+    }
 
     private String generateRandomPassword(int length) {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+";
